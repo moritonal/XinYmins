@@ -24,7 +24,7 @@ export default
   },
   data() {
     return {
-      msg: 'Welcome friend, to Your Vue.js App!'
+      
     }
   }
 }
