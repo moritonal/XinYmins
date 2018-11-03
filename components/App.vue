@@ -3,14 +3,19 @@
     <header-component></header-component>
 
     <spinner-component 
+      class="border"
       v-bind:tasks="tasks" 
       v-bind:time-start="timeStart"
       v-bind:time-now="timeNow"
       v-bind:time-end="timeEnd"
+      inner-radius-percentage="0.3"
+      chunk-padding="5"
+      chunk-stroke="10"
       v-on:click="click">
     </spinner-component>
 
-    <input type="button" v-on:click="click" value="Click"></input>
+    <input type="button" v-on:click="click" value="Click"/>
+    <input type="button" v-on:click="add" value="Add"/>
 
     <footer-component></footer-component>
   </div>
@@ -32,11 +37,20 @@ export default
       "footer-component": Footer
   },
   mounted : function() {
+
+    this.tasks = [];
+    for (let i=0;i<6;i++) {
+      this.tasks.push({});
+    }
+
     setInterval(() => {
       this.timeNow = moment();
     }, 10);
   },
   methods: {
+    add: function() {
+      this.tasks.push({});
+    },
     click: function() {
       let nextTask = this.tasks.find(i=>i.stopTime == null);
       
@@ -46,17 +60,7 @@ export default
   data() {
     return {
       msg: 'Welcome friend, to Your Vue.js App!',
-      tasks: [
-        {
-
-        },{
-
-        },{
-
-        },{
-
-        },
-      ],
+      tasks: null,
       timeStart: moment(),
       timeNow: moment(),
       timeEnd: moment().add(1, "minute")
@@ -66,6 +70,9 @@ export default
 </script>
 
 <style lang="css">
+  .border {
+    border: 1px solid black;
+  }
   #app 
   {
     color: rgb(136, 0, 163);

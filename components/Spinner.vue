@@ -15,17 +15,15 @@ function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
   };
 }
 
-function describeArc(x, y, radius, startAngle, endAngle){
+function describeArc(x, y, radius, innerRadius, startAngle, endAngle){
 
     var outerStart = polarToCartesian(x, y, radius, endAngle);
     var outerEnd = polarToCartesian(x, y, radius, startAngle);
 
     var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
 
-    let inner = radius/2;
-
-    var innerStart = polarToCartesian(x, y, inner, endAngle);
-    var innerEnd = polarToCartesian(x, y, inner, startAngle);
+    var innerStart = polarToCartesian(x, y, innerRadius, endAngle);
+    var innerEnd = polarToCartesian(x, y, innerRadius, startAngle);
 
     var mid = { x: (outerEnd.x + innerEnd.x) / 2, y: (outerEnd.y + innerEnd.y) / 2 };
 
@@ -33,7 +31,7 @@ function describeArc(x, y, radius, startAngle, endAngle){
         //"M", x, y,
         "M", mid.x, mid.y,
         "L", innerEnd.x, innerEnd.y,
-        "A", inner, inner, 0, largeArcFlag, 1, innerStart.x, innerStart.y,
+        "A", innerRadius, innerRadius, 0, largeArcFlag, 1, innerStart.x, innerStart.y,
         "L", outerStart.x, outerStart.y,
         "A", radius, radius, 0, largeArcFlag, 0, outerEnd.x, outerEnd.y,
         "L", innerEnd.x, innerEnd.y,
@@ -52,32 +50,38 @@ export default {
     "stopPoints",
     "timeStart",
     "timeNow",
-    "timeEnd"
+    "timeEnd",
+    "innerRadiusPercentage",
+    "chunkPadding",
+    "chunkStroke"
   ],
   data () {
     return {
       svgChunks: null,
       svgProgress: null,
       total: 360,
-      padding: 5,
-      size: 490,
+      canvasSize: 500,
+      size: null,
       radius: null,
       innerRadius: null,
-      width: null,
       x: null,
       y: null,
-      svg: null
+      svg: null,
     }
   },
   mounted: function() {
 
-    this.radius =  this.size/2,
-    this.innerRadius = this.size/1.5;
-    this.width = this.size/6,
-    this.x = 5 + this.size/2,
-    this.y = 5 + this.size/2,
+    this.canvasPadding = 20;
 
-    this.svg = SVG("drawing").size(500,500);
+    this.size = this.canvasSize-this.canvasPadding;
+
+    this.radius = (this.size/2);
+    this.innerRadius = this.radius - (this.radius * this.innerRadiusPercentage);
+
+    this.x = (this.canvasPadding/2) + this.size/2;
+    this.y = (this.canvasPadding/2) + this.size/2;
+
+    this.svg = SVG("drawing").size(this.canvasSize,this.canvasSize);
 
     this.svgChunks = [];
 
@@ -85,19 +89,17 @@ export default {
 
     // Draw time
     this.UpdateSvg();
-
-    /*this.svg
-      .circle(this.innerRadius)
-      .fill("white")
-      .move(this.x - (this.innerRadius/2), this.y - (this.innerRadius/2))
-      //.stroke({ width: 2 });*/
-
   },
   watch: {
-      timeNow: function(val) {
-        this.UpdateChunks();
-        this.UpdateSvg();
+    timeNow: function(val) {
+
+      if (this.timeNow > this.timeEnd) {
+        return;
       }
+
+      this.UpdateChunks();
+      this.UpdateSvg();
+    }
   },
   computed: {
     TotalProgress: function() {
@@ -114,7 +116,7 @@ export default {
   methods: {
     UpdateChunks: function() {
 
-      if (this.timeNow > this.timeEnd)
+      if (this.tasks == null)
         return;
 
       let current = 0;
@@ -167,7 +169,7 @@ export default {
 
         if (this.tasks[i].colour == null) {
           this.tasks[i].colour = randomcolor({
-              hue: "green",
+              hue: "pink",
               luminosity: "dark"
             });
         }
@@ -180,9 +182,9 @@ export default {
             this.x, 
             this.y,
             this.radius,
-            this.width,
-            current + (this.padding/2),
-            current + chunkSize - (this.padding/2));
+            this.innerRadius,
+            current,
+            current + chunkSize - (this.chunkPadding));
 
           this.svgChunks.push(chunk);
 
@@ -192,21 +194,21 @@ export default {
             this.x, 
             this.y,
             this.radius,
-            this.width,
-            current + (this.padding/2),
-            current + chunkSize - (this.padding/2),
+            this.innerRadius,
+            current,
+            current + chunkSize - (this.chunkPadding),
             this.svgChunks[i]);
 
           this.svgChunks[i] = chunk;
         }
         
         chunk.fill(this.tasks[i].colour);
-        chunk.stroke({width:10});
+        chunk.stroke({width:this.chunkStroke});
 
         current += chunkSize;
       }
     },
-    drawChunk: function(x, y, radius, width, start, end, svg) {
+    drawChunk: function(x, y, radius, innerRadius, start, end, svg) {
       
       if (svg == null) {
 
@@ -220,22 +222,27 @@ export default {
           stroke: function(a) {
             this.outer.stroke(a);
             return this;
+          },
+          front: function(a) {
+            this.outer.front(a);
+            return this;
           }
         };
       }
 
       if (svg && svg.outer) {
-        svg.outer.plot(describeArc(x, y, radius, start, end));
+        svg.outer.plot(describeArc(x, y, radius, innerRadius, start, end));
       } else {
-        svg.outer = this.svg.path(describeArc(x, y, radius, start, end));
+        svg.outer = this.svg.path(describeArc(x, y, radius, innerRadius, start, end));
       }
 
       return svg;
     },
     UpdateSvg: function() {
-      this.svgProgress = this.drawChunk(this.x, this.y, this.radius, this.width, 0 + (this.padding/2), Math.max(this.padding/2, this.TotalProgress-(this.padding/2)), this.svgProgress)
+      this.svgProgress = this.drawChunk(this.x, this.y, this.radius, this.innerRadius, 0, Math.max(0, this.TotalProgress - this.chunkPadding), this.svgProgress)
         .fill({color: "blue", opacity: 0.6})
-        .stroke({width: 10});
+        .stroke({width: this.chunkStroke})
+        .front();
     }
   }
 }
