@@ -33,7 +33,7 @@ export default
   },
   mounted : function() {
     setInterval(() => {
-      // this.timeNow = moment();
+      this.timeNow = moment();
     }, 10);
   },
   methods: {
@@ -55,12 +55,10 @@ export default
 
         },{
 
-        },{
-
-        }
+        },
       ],
       timeStart: moment(),
-      timeNow: moment().add(20, "seconds"),
+      timeNow: moment(),
       timeEnd: moment().add(1, "minute")
     }
   }

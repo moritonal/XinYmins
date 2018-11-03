@@ -21,7 +21,6 @@ function describeArc(x, y, radius, startAngle, endAngle){
     var outerEnd = polarToCartesian(x, y, radius, startAngle);
 
     var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-    var largeNotArcFlag = endAngle - startAngle <= 180 ? "1" : "0";
 
     let inner = radius/2;
 
@@ -34,11 +33,10 @@ function describeArc(x, y, radius, startAngle, endAngle){
         //"M", x, y,
         "M", mid.x, mid.y,
         "L", innerEnd.x, innerEnd.y,
-        "A", inner, inner, 0, 0, 1, innerStart.x, innerStart.y,
+        "A", inner, inner, 0, largeArcFlag, 1, innerStart.x, innerStart.y,
         "L", outerStart.x, outerStart.y,
         "A", radius, radius, 0, largeArcFlag, 0, outerEnd.x, outerEnd.y,
         "L", innerEnd.x, innerEnd.y,
-        // "A", inner, inner, 0, 1, 0, innerStart.x, innerStart.y,
     ].join(" ");
 
     return d;       
@@ -235,7 +233,9 @@ export default {
       return svg;
     },
     UpdateSvg: function() {
-      this.svgProgress = this.drawChunk(this.x, this.y, this.radius, this.width, 0, this.TotalProgress, this.svgProgress).fill({color: "blue", opacity: 0.6});
+      this.svgProgress = this.drawChunk(this.x, this.y, this.radius, this.width, 0 + (this.padding/2), Math.max(this.padding/2, this.TotalProgress-(this.padding/2)), this.svgProgress)
+        .fill({color: "blue", opacity: 0.6})
+        .stroke({width: 10});
     }
   }
 }
