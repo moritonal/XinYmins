@@ -10,6 +10,8 @@
       v-on:click="click">
     </spinner-component>
 
+    <input type="button" v-on:click="click" value="Click"></input>
+
     <footer-component></footer-component>
   </div>
 </template>
@@ -31,12 +33,14 @@ export default
   },
   mounted : function() {
     setInterval(() => {
-      //this.timeNow = moment();
-    }, 100);
+      // this.timeNow = moment();
+    }, 10);
   },
   methods: {
     click: function() {
-      this.timeNow = moment();
+      let nextTask = this.tasks.find(i=>i.stopTime == null);
+      
+      nextTask.stopTime = moment();
     }
   },
   data() {
@@ -44,13 +48,19 @@ export default
       msg: 'Welcome friend, to Your Vue.js App!',
       tasks: [
         {
-          stopTime: moment().add(10, "seconds")
+
         },{
-          stopTime: moment().add(15, "seconds")
-        },{},{}
+
+        },{
+
+        },{
+
+        },{
+
+        }
       ],
       timeStart: moment(),
-      timeNow: moment().add(12, "seconds"),
+      timeNow: moment().add(20, "seconds"),
       timeEnd: moment().add(1, "minute")
     }
   }
