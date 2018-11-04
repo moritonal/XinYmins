@@ -53,7 +53,10 @@ export default {
     "timeEnd",
     "innerRadiusPercentage",
     "chunkPadding",
-    "chunkStroke"
+    "chunkStroke",
+    "progressColour",
+    "chunkColour",
+    "chunkLuminosity",
   ],
   data () {
     return {
@@ -169,8 +172,8 @@ export default {
 
         if (this.tasks[i].colour == null) {
           this.tasks[i].colour = randomcolor({
-              hue: "pink",
-              luminosity: "dark"
+              hue: this.chunkColour,
+              luminosity: this.chunkLuminosity
             });
         }
 
@@ -240,7 +243,7 @@ export default {
     },
     UpdateSvg: function() {
       this.svgProgress = this.drawChunk(this.x, this.y, this.radius, this.innerRadius, 0, Math.max(0, this.TotalProgress - this.chunkPadding), this.svgProgress)
-        .fill({color: "blue", opacity: 0.6})
+        .fill({color: this.progressColour, opacity: 0.6})
         .stroke({width: this.chunkStroke})
         .front();
     }

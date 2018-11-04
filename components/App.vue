@@ -11,6 +11,9 @@
       inner-radius-percentage="0.3"
       chunk-padding="5"
       chunk-stroke="10"
+      progress-colour="red"
+      chunk-colour="green"
+      chunk-luminosity="bright"
       v-on:click="click">
     </spinner-component>
 
@@ -39,13 +42,15 @@ export default
   mounted : function() {
 
     this.tasks = [];
-    for (let i=0;i<6;i++) {
+    for (let i=0;i<7;i++) {
       this.tasks.push({});
     }
 
     setInterval(() => {
       this.timeNow = moment();
     }, 10);
+
+    this.timeNow = moment();
   },
   methods: {
     add: function() {
