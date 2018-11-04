@@ -45,19 +45,37 @@ import randomcolor from "randomcolor"
 
 export default {
   name: 'spinner-component',
-  props: [
-    "tasks",
-    "stopPoints",
-    "timeStart",
-    "timeNow",
-    "timeEnd",
-    "innerRadiusPercentage",
-    "chunkPadding",
-    "chunkStroke",
-    "progressColour",
-    "chunkColour",
-    "chunkLuminosity",
-  ],
+  props: {
+    "tasks": Array,
+    "stopPoints": Array,
+    "timeStart": Object,
+    "timeNow": Object,
+    "timeEnd": Object,
+    "innerRadiusPercentage": {
+      type: Number,
+      default: 0.3
+    },
+    "chunkPadding": {
+      type: Number,
+      default: 5
+    },
+    "chunkStroke": {
+      type: Number,
+      default: 10
+    },
+    "progressColour": {
+      type: String,
+      default: "blue"
+    },
+    "chunkColour": {
+      type: String,
+      default: "pink"
+    },
+    "chunkLuminosity": {
+      type: String,
+      default: "bright"
+    },
+  },
   data () {
     return {
       svgChunks: null,

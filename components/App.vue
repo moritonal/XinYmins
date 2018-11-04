@@ -8,9 +8,9 @@
       v-bind:time-start="timeStart"
       v-bind:time-now="timeNow"
       v-bind:time-end="timeEnd"
-      inner-radius-percentage="0.3"
-      chunk-padding="5"
-      chunk-stroke="10"
+      v-bind:inner-radius-percentage=0.4
+      v-bind:chunk-padding=10
+      v-bind:chunk-stroke=10
       progress-colour="red"
       chunk-colour="green"
       chunk-luminosity="bright"
