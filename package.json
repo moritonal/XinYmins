@@ -4,7 +4,8 @@
   "description": "Time tracking software to organise meetings",
   "main": "index.js",
   "scripts": {
-    "serve": "parcel ./index.html"
+    "serve": "parcel ./index.html",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,15 @@
     "vue-hot-reload-api": "^2.3.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@storybook/addon-knobs": "^4.0.2",
+    "@storybook/addon-options": "^4.0.2",
+    "@storybook/vue": "^4.0.2",
     "@vue/component-compiler-utils": "^2.3.0",
-    "vue-template-compiler": "^2.5.17"
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "vue-loader": "^14.2.1",
+    "vue-template-compiler": "^2.5.17",
+    "vuex": "^3.0.1"
   }
 }

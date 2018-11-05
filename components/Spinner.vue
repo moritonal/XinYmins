@@ -47,7 +47,6 @@ export default {
   name: 'spinner-component',
   props: {
     "tasks": Array,
-    "stopPoints": Array,
     "timeStart": Object,
     "timeNow": Object,
     "timeEnd": Object,
