@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container-fluid">
+  <div id="app" class="container-fluid h-100">
 
     <div class="row mx-4 row py-4 justify-content-center d-flex">
       <div class="col m-1">
@@ -25,7 +25,7 @@
 
     <spinner-component 
       id="spinner"
-      class="d-flex justify-content-center mb-4"
+      class="d-flex justify-content-center"
       v-bind:tasks="tasks"
       v-bind:time-start="timeStart"
       v-bind:time-now="timeNow"
@@ -39,10 +39,10 @@
       chunk-luminosity="bright">
     </spinner-component>
 
-    <footer-component class="navbar fixed-bottom"
+    <footer-component class=""
       v-on:next="next"
       v-on:previous="previous">
-      </footer-component>
+    </footer-component>
   </div>
 </template>
 
@@ -71,7 +71,7 @@ export default
 
     setInterval(() => {
       this.timeNow = moment();
-    }, 10);
+    }, 33);
 
     this.timeNow = moment();
   },
@@ -100,9 +100,9 @@ export default
       }
     },
     previous: function() {
-      let lastTask = this.tasks.reverse().find(i=>i.stopTime != null);
+      let lastTask = this.tasks.reduce((prev, curr) => curr.stopTime != null ? curr : prev, null);
 
-      if (lastTime) {
+      if (lastTask) {
         lastTask.stopTime = null;
       }
     }
@@ -126,13 +126,17 @@ export default
   {
     color: rgb(136, 0, 163);
     min-width: 240px;
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite
   }
   html {
     font-size: 4vmin;
   }
   #spinner {
     width: 90vmin;
-    height: 90vmin;
+    /*height: 90vmin;*/
+    flex-grow: 1;
     margin-left: auto;
     margin-right: auto;
   }
