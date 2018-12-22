@@ -1,6 +1,27 @@
 <template>
   <div id="app" class="container-fluid">
-    <header-component class="row mx-4" ></header-component>
+
+    <div class="row mx-4 row py-4 justify-content-center d-flex">
+      <div class="col m-1">
+        <div class="input-group">
+          <input type="number" value="1" class="form-control" v-model="numberOfItems" />
+          <div class="input-group-append">
+            <span class="input-group-text">items</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-1 justify-content-center align-items-center d-flex">
+        <span>in</span>
+      </div>
+      <div class="col m-1">
+        <div class="input-group">
+          <input type="number" value="1" class="form-control" v-model="numberOfMinutes" />
+          <div class="input-group-append">
+            <span class="input-group-text">mins</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <spinner-component 
       id="spinner"
@@ -12,13 +33,16 @@
       v-bind:inner-radius-percentage=0.4
       v-bind:chunk-padding=10
       v-bind:chunk-stroke=10
+      v-bind:disabled=false
       progress-colour="red"
       chunk-colour="green"
-      chunk-luminosity="bright"
-      v-on:click="click">
+      chunk-luminosity="bright">
     </spinner-component>
 
-    <footer-component class="navbar fixed-bottom"></footer-component>
+    <footer-component class="navbar fixed-bottom"
+      v-on:next="next"
+      v-on:previous="previous">
+      </footer-component>
   </div>
 </template>
 
@@ -39,35 +63,56 @@ export default
   },
   mounted : function() {
 
-    this.tasks = [];
+    /*this.tasks = [];
 
     for (let i=0;i<7;i++) {
       this.tasks.push({});
-    }
+    }*/
 
-    /*setInterval(() => {
+    setInterval(() => {
       this.timeNow = moment();
-    }, 10);*/
+    }, 10);
 
     this.timeNow = moment();
   },
-  methods: {
-    add: function() {
-      this.tasks.push({});
+  computed: {
+    tasks: function() {
+
+      let num = parseInt(this.numberOfItems);
+      let t = [];
+
+      for (let i=0;i<num;i++) {
+        t.push({});
+      }
+
+      return t;
     },
-    click: function() {
+    timeEnd: function() {
+      return moment().add(this.numberOfMinutes, "minute");
+    }
+  },
+  methods: {
+    next: function()  {
       let nextTask = this.tasks.find(i=>i.stopTime == null);
       
-      nextTask.stopTime = moment();
+      if (nextTask) {
+        nextTask.stopTime = moment();
+      }
+    },
+    previous: function() {
+      let lastTask = this.tasks.reverse().find(i=>i.stopTime != null);
+
+      if (lastTime) {
+        lastTask.stopTime = null;
+      }
     }
   },
   data() {
     return {
-      msg: 'Welcome friend, to Your Vue.js App!',
-      tasks: null,
       timeStart: moment(),
       timeNow: moment(),
-      timeEnd: moment().add(1, "minute")
+      numberOfItems: 6,
+      numberOfMinutes: 5
     }
   }
 }
@@ -83,7 +128,7 @@ export default
     min-width: 240px;
   }
   html {
-    font-size: 42px;
+    font-size: 4vmin;
   }
   #spinner {
     width: 90vmin;

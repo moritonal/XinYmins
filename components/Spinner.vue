@@ -1,6 +1,6 @@
 <template>
   <div id="spinner">
-    <div id="drawing" ref="drawing"></div>
+    <div id="drawing" ref="drawing" v-show="!disabled"></div>
   </div>
 </template>
 
@@ -76,6 +76,7 @@ export default {
       type: String,
       default: "bright"
     },
+    "disabled": false
   },
   data () {
     return {
@@ -88,7 +89,7 @@ export default {
       innerRadius: null,
       x: null,
       y: null,
-      svg: null,
+      svg: null
     }
   },
   mounted: function() {
@@ -120,6 +121,17 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   watch: {
+    tasks: function(val) {
+
+      console.log("Updating tasks");
+      
+      this.svgChunks = [];
+      this.svgProgress = null;
+      this.svg.clear();
+    
+      this.UpdateChunks();
+      this.UpdateSvg();
+    },
     timeNow: function(val) {
 
       if (this.timeNow > this.timeEnd) {
