@@ -1,5 +1,7 @@
 <template>
-  <div id="spinner"><div id="drawing"></div></div>
+  <div id="spinner">
+    <div id="drawing" ref="drawing"></div>
+  </div>
 </template>
 
 <script>
@@ -91,9 +93,11 @@ export default {
   },
   mounted: function() {
 
+    this.handleResize();
+
     this.canvasPadding = 20;
 
-    this.size = this.canvasSize-this.canvasPadding;
+    this.size = this.canvasSize - this.canvasPadding;
 
     this.radius = (this.size/2);
     this.innerRadius = this.radius - (this.radius * this.innerRadiusPercentage);
@@ -109,6 +113,11 @@ export default {
 
     // Draw time
     this.UpdateSvg();
+
+    window.addEventListener('resize', this.handleResize)
+  },
+  beforeDestroy: function () {
+    window.removeEventListener('resize', this.handleResize)
   },
   watch: {
     timeNow: function(val) {
@@ -134,6 +143,9 @@ export default {
     }
   },
   methods: {
+    handleResize() {
+      this.canvasSize = this.$refs["drawing"].clientWidth;
+    },
     UpdateChunks: function() {
 
       if (this.tasks == null)
@@ -259,6 +271,7 @@ export default {
       return svg;
     },
     UpdateSvg: function() {
+      
       this.svgProgress = this.drawChunk(this.x, this.y, this.radius, this.innerRadius, 0, Math.max(0, this.TotalProgress - this.chunkPadding), this.svgProgress)
         .fill({color: this.progressColour, opacity: 0.6})
         .stroke({width: this.chunkStroke})
@@ -271,7 +284,8 @@ export default {
 <style lang="css">
   #spinner {
     color: #56b983;
-    width: 500px;
-    height: 500px;
+  }
+  #drawing {
+    width: 100%;
   }
 </style>

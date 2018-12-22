@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Glitch0011/XinYmins#readme",
   "dependencies": {
+    "bootstrap-vue": "^2.0.0-rc.11",
     "moment": "^2.22.2",
     "randomcolor": "^0.5.3",
     "svg.js": "^2.6.6",

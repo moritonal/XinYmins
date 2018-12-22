@@ -1,10 +1,11 @@
 <template>
-  <div id="app">
-    <header-component></header-component>
+  <div id="app" class="container-fluid">
+    <header-component class="row mx-4" ></header-component>
 
     <spinner-component 
-      class="border"
-      v-bind:tasks="tasks" 
+      id="spinner"
+      class="d-flex justify-content-center mb-4"
+      v-bind:tasks="tasks"
       v-bind:time-start="timeStart"
       v-bind:time-now="timeNow"
       v-bind:time-end="timeEnd"
@@ -17,10 +18,7 @@
       v-on:click="click">
     </spinner-component>
 
-    <input type="button" v-on:click="click" value="Click"/>
-    <input type="button" v-on:click="add" value="Add"/>
-
-    <footer-component></footer-component>
+    <footer-component class="navbar fixed-bottom"></footer-component>
   </div>
 </template>
 
@@ -42,13 +40,14 @@ export default
   mounted : function() {
 
     this.tasks = [];
+
     for (let i=0;i<7;i++) {
       this.tasks.push({});
     }
 
-    setInterval(() => {
+    /*setInterval(() => {
       this.timeNow = moment();
-    }, 10);
+    }, 10);*/
 
     this.timeNow = moment();
   },
@@ -81,5 +80,15 @@ export default
   #app 
   {
     color: rgb(136, 0, 163);
+    min-width: 240px;
+  }
+  html {
+    font-size: 42px;
+  }
+  #spinner {
+    width: 90vmin;
+    height: 90vmin;
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
