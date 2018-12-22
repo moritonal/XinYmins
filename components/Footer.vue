@@ -1,13 +1,10 @@
 <template>
-  <span>
-    <div class="row btn-group w-100 m-2">
-      <input type="button" class="btn btn-secondary col-2 fluid-height" v-on:click="$emit('previous')" value="<"/>
-      <input type="button" class="btn btn-primary col-10 fluid-height" v-on:click="$emit('next')" value=">"/>
+  <div class="w-100">
+    <div id="cont" class="row btn-group m-2">
+      <input type="button" id="previous-btn" class="btn btn-secondary" v-on:click="$emit('previous')" value="<"/>
+      <input type="button" id="next-btn" class="btn btn-primary" v-on:click="$emit('next')" value=">"/>
     </div>
-    <!--<div class="row">
-      <input type="button" v-on:click="add" value="Add"/>
-    </div>-->
-  </span>
+  </div>
 </template>
 
 <script>
@@ -33,8 +30,14 @@ export default {
   #footer {
     color: #56b983;
   }
-  
-  .fluid-height {
-    
+  #cont {
+    display: flex;
+    flex-direction: row;
+  }
+  #previous-btn {
+    flex-grow: 1;
+  }
+  #next-btn {
+    flex-grow: 10;
   }
 </style>
