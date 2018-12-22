@@ -96,16 +96,6 @@ export default {
 
     this.handleResize();
 
-    this.canvasPadding = 20;
-
-    this.size = this.canvasSize - this.canvasPadding;
-
-    this.radius = (this.size/2);
-    this.innerRadius = this.radius - (this.radius * this.innerRadiusPercentage);
-
-    this.x = (this.canvasPadding/2) + this.size/2;
-    this.y = (this.canvasPadding/2) + this.size/2;
-
     this.svg = SVG("drawing").size(this.canvasSize,this.canvasSize);
 
     this.svgChunks = [];
@@ -156,7 +146,24 @@ export default {
   },
   methods: {
     handleResize() {
-      this.canvasSize = this.$refs["drawing"].clientWidth;
+      this.canvasSize = Math.min(this.$refs["drawing"].clientWidth,this.$refs["drawing"].clientHeight);
+      console.log("Canvas Size is", this.canvasSize);
+
+      this.canvasPadding = 20;
+
+      this.size = this.canvasSize - this.canvasPadding;
+
+      this.radius = (this.size/2);
+      this.innerRadius = this.radius - (this.radius * this.innerRadiusPercentage);
+
+      this.x = (this.canvasPadding/2) + this.size/2;
+      this.y = (this.canvasPadding/2) + this.size/2;
+
+      if (this.svg) {
+
+
+        this.svg.size(this.canvasSize,this.canvasSize);        
+      }
     },
     UpdateChunks: function() {
 
@@ -169,7 +176,7 @@ export default {
       let spaceUsed = null;
       let firstFlexibleChunk = true;
 
-      for (let i=0;i<this.tasks.length;i++) {
+      for (let i = 0; i < this.tasks.length; i++) {
         
         let task = this.tasks[i];
         let chunkSize = this.total / this.tasks.length;
@@ -299,5 +306,7 @@ export default {
   }
   #drawing {
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
 </style>
