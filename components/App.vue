@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="container-fluid h-100">
 
-    <div class="row mx-4 row py-4 justify-content-center d-flex">
+    <div class="row mx-2 row py-4 justify-content-center d-flex">
       <div class="col m-1">
         <div class="input-group">
           <input type="number" value="1" class="form-control" v-model="numberOfItems" />
@@ -62,12 +62,6 @@ export default
       "footer-component": Footer
   },
   mounted : function() {
-
-    /*this.tasks = [];
-
-    for (let i=0;i<7;i++) {
-      this.tasks.push({});
-    }*/
 
     setInterval(() => {
       this.timeNow = moment();
@@ -132,6 +126,11 @@ export default
   }
   html {
     font-size: 4vmin;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
   }
   #spinner {
     width: 90vmin;
