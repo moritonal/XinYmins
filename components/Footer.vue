@@ -26,13 +26,19 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="scss">
+
+  @import "./../scss/custom.scss";
+
   #footer {
-    color: #56b983;
+    color: $body-color;
   }
   #cont {
     display: flex;
     flex-direction: row;
+
+    border: 1px solid black;
+    border-radius: 5px;
   }
   #previous-btn {
     flex-grow: 1;

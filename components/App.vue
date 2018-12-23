@@ -31,12 +31,12 @@
       v-bind:time-now="timeNow"
       v-bind:time-end="timeEnd"
       v-bind:inner-radius-percentage=0.4
-      v-bind:chunk-padding=10
-      v-bind:chunk-stroke=10
+      v-bind:chunk-padding=8
+      v-bind:chunk-stroke=2
       v-bind:disabled=false
       progress-colour="red"
-      chunk-colour="green"
-      chunk-luminosity="bright">
+      chunk-colour="monochrome"
+      chunk-luminosity="light">
     </spinner-component>
 
     <footer-component class=""
@@ -112,17 +112,18 @@ export default
 }
 </script>
 
-<style lang="css">
+<style lang="scss">
+
   .border {
     border: 1px solid black;
   }
-  #app 
+  #app
   {
-    color: rgb(136, 0, 163);
+    color: body-color;
     min-width: 240px;
     display: flex;
     flex-direction: column;
-    background-color: antiquewhite
+    background-color: body-bg;
   }
   html {
     font-size: 4vmin;
@@ -134,9 +135,9 @@ export default
   }
   #spinner {
     width: 90vmin;
-    /*height: 90vmin;*/
     flex-grow: 1;
     margin-left: auto;
     margin-right: auto;
   }
+
 </style>

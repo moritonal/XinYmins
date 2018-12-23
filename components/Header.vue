@@ -23,6 +23,8 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'header-component',  
   data () {
@@ -40,10 +42,55 @@ export default {
     }
   }
 }
+
 </script>
 
-<style lang="css">
+<style lang="scss">
+
+  @import "./../scss/custom.scss";
+
   #header {
     color: #56b983;
+  }
+
+  .input-group {
+    justify-content: center;
+  }
+
+  input.form-control {
+     border-color: black;
+     color: $body-color;
+  }
+
+  span.input-group-text {
+     border-color: black;
+     color: $body-color;
+  }
+
+  input.form-control {
+    background-color: transparent;
+    max-width: 100px;
+  }
+
+  span.input-group-text {
+    background-color: transparent;
+  }
+
+  input[type='number'] {
+      -moz-appearance:textfield;
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+  
+  input:focus {
+    background-color:red;
+  }
+  
+  .input-group > .form-control:focus {
+    background-color: transparent;
   }
 </style>

@@ -1,0 +1,10 @@
+$theme-colors: (
+  "primary": #c7c7c7,
+  "secondary": #507b97
+);
+
+$body-bg: #232323;
+$body-color: white;
+$input-border: white;
+
+@import "../node_modules/bootstrap/scss/bootstrap";

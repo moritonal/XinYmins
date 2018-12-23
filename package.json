@@ -34,6 +34,7 @@
     "@vue/component-compiler-utils": "^2.3.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.4",
+    "sass": "^1.15.2",
     "vue-loader": "^14.2.1",
     "vue-template-compiler": "^2.5.17",
     "vuex": "^3.0.1"

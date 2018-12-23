@@ -147,7 +147,6 @@ export default {
   methods: {
     handleResize() {
       this.canvasSize = Math.min(this.$refs["drawing"].clientWidth,this.$refs["drawing"].clientHeight);
-      console.log("Canvas Size is", this.canvasSize);
 
       this.canvasPadding = 20;
 
