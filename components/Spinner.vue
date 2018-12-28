@@ -6,8 +6,6 @@
 
 <script>
 
-import * as svg from "svg.js"
-
 function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
   var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
 
@@ -41,9 +39,6 @@ function describeArc(x, y, radius, innerRadius, startAngle, endAngle){
 
     return d;       
 }
-
-import moment from "moment"
-import randomcolor from "randomcolor"
 
 export default {
   name: 'spinner-component',
@@ -92,9 +87,11 @@ export default {
       svg: null
     }
   },
-  mounted: function() {
+  mounted: async function() {
 
     this.handleResize();
+
+    let SVG = await import("svg.js");
 
     this.svg = SVG("drawing").size(this.canvasSize,this.canvasSize);
 
@@ -123,6 +120,13 @@ export default {
       this.UpdateSvg();
     },
     timeNow: function(val) {
+
+      if (this.canvasSize != Math.min(this.$refs["drawing"].clientWidth,this.$refs["drawing"].clientHeight)) {
+        this.handleResize();
+      }
+      
+      if (this.svg == null)
+        return;
 
       if (this.timeNow > this.timeEnd) {
         return;
@@ -164,7 +168,7 @@ export default {
         this.svg.size(this.canvasSize,this.canvasSize);        
       }
     },
-    UpdateChunks: function() {
+    UpdateChunks: async function() {
 
       if (this.tasks == null)
         return;
@@ -218,6 +222,9 @@ export default {
         }
 
         if (this.tasks[i].colour == null) {
+
+          let randomcolor = await import("randomcolor");
+
           this.tasks[i].colour = randomcolor({
               hue: this.chunkColour,
               luminosity: this.chunkLuminosity
@@ -283,7 +290,9 @@ export default {
       if (svg && svg.outer) {
         svg.outer.plot(describeArc(x, y, radius, innerRadius, start, end));
       } else {
-        svg.outer = this.svg.path(describeArc(x, y, radius, innerRadius, start, end));
+        if (this.svg) {
+          svg.outer = this.svg.path(describeArc(x, y, radius, innerRadius, start, end));
+        }
       }
 
       return svg;

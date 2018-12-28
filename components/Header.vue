@@ -24,7 +24,6 @@
 
 <script>
 
-
 export default {
   name: 'header-component',  
   data () {

@@ -48,18 +48,15 @@
 
 <script>
 
-import Spinner from "./Spinner.vue"
-import Header from "./Header.vue"
-import Footer from "./Footer.vue"
 import moment from "moment"
 
 export default
 {
   name: 'app',
   components: {
-      "spinner-component": Spinner,
-      "header-component": Header,
-      "footer-component": Footer
+      "spinner-component": () => import("./Spinner.vue"),
+      "header-component": () => import("./Header.vue"),
+      "footer-component": () => import("./Footer.vue")
   },
   mounted : function() {
 
@@ -114,16 +111,19 @@ export default
 
 <style lang="scss">
 
+  @import "./../scss/custom.scss";
+
   .border {
     border: 1px solid black;
   }
   #app
   {
-    color: body-color;
+    color: $body-color;
     min-width: 240px;
     display: flex;
     flex-direction: column;
-    background-color: body-bg;
+    background-color: $body-bg;
+    max-width: $max-width;
   }
   html {
     font-size: 4vmin;

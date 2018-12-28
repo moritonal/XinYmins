@@ -8,6 +8,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'footer-component',
   data () {
@@ -24,6 +25,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style lang="scss">
