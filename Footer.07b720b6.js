@@ -2,4 +2,4 @@ parcelRequire=function(e,r,n,t){var i="function"==typeof parcelRequire&&parcelRe
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e={name:"footer-component",data:function(){return{}},methods:{previous:function(){},next:function(){}}};exports.default=e;
 (function(){var t=exports.default||module.exports;"function"==typeof t&&(t=t.options),Object.assign(t,{render:function(){var t=this,n=t.$createElement,e=t._self._c||n;return e("div",{staticClass:"w-100"},[e("div",{staticClass:"row btn-group m-2",attrs:{id:"cont"}},[e("input",{staticClass:"btn btn-secondary",attrs:{type:"button",id:"previous-btn",value:"<"},on:{click:function(n){t.$emit("previous")}}}),t._v(" "),e("input",{staticClass:"btn btn-primary",attrs:{type:"button",id:"next-btn",value:">"},on:{click:function(n){t.$emit("next")}}})])])},staticRenderFns:[],_compiled:!0,_scopeId:null,functional:void 0});})();
 },{}]},{},["IeFb"], null)
-//# sourceMappingURL=/Footer.07b720b6.map
+//# sourceMappingURL=Footer.07b720b6.map

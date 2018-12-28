@@ -1039,4 +1039,4 @@ module.exports=function(n){return new Promise(function(e,o){var r=document.creat
 },{}],0:[function(require,module,exports) {
 var b=require("Ak0P");b.register("css",require("FavO"));b.register("js",require("ZgTD"));
 },{}]},{},[0,"Focm"], null)
-//# sourceMappingURL=/XinYmins.408d50f6.map
+//# sourceMappingURL=XinYmins.408d50f6.map

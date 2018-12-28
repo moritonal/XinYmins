@@ -10,4 +10,4 @@ module.exports=function(n){return new Promise(function(e,o){var r=document.creat
 },{}],0:[function(require,module,exports) {
 var b=require("Ak0P");b.register("js",require("ZgTD"));b.load([]).then(function(){require("GBVi");});
 },{}]},{},[0], null)
-//# sourceMappingURL=/Spinner.1cf3291a.map
+//# sourceMappingURL=Spinner.1cf3291a.map
