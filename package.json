@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "parcel ./index.html",
     "build": "npm-run-all build:*",
-    "build:parcel": "parcel build ./index.html",
+    "build:parcel": "parcel build ./index.html --public-url .",
     "build:gulp": "gulp",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "docker": "docker run --rm -it -p 80:80 (docker build -q .)",
