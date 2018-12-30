@@ -103,7 +103,6 @@ export default {
     this.UpdateSvg();
 
     window.addEventListener('resize', this.handleResize);
-    console.log("Mounted")
     this.$forceUpdate();
   },
   beforeDestroy: function () {
@@ -160,10 +159,6 @@ export default {
 
       this.calculateSize();
 
-      console.log("Canvas Size:", this.canvasSize);
-
-      console.log(this.$refs["drawing"]);
-
       this.canvasPadding = 20;
 
       this.size = this.canvasSize - this.canvasPadding;
@@ -176,8 +171,8 @@ export default {
 
       if (this.svg) {
         this.svg.size(this.canvasSize, this.canvasSize);
-        this.$refs["drawing"].width = this.canvasSize;
-        this.$refs["drawing"].height = this.canvasSize;
+        //this.$refs["drawing"].width = this.canvasSize;
+        //this.$refs["drawing"].height = this.canvasSize;
 
       }
     },
