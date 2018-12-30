@@ -126,7 +126,7 @@ export default
     max-width: $max-width;
   }
   html {
-    font-size: 4vmin;
+    font-size: 24px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -134,7 +134,6 @@ export default
     user-select: none;
   }
   #spinner {
-    width: 90vmin;
     flex-grow: 1;
     margin-left: auto;
     margin-right: auto;
