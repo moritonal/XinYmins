@@ -78,10 +78,10 @@ export default {
       svgChunks: null,
       svgProgress: null,
       total: 360,
-      canvasSize: 500,
       size: null,
       radius: null,
       innerRadius: null,
+      canvasSize: 0,
       x: null,
       y: null,
       svg: null
@@ -93,7 +93,7 @@ export default {
 
     let SVG = await import("svg.js");
 
-    this.svg = SVG("drawing").size(this.canvasSize,this.canvasSize);
+    this.svg = SVG("drawing").size(this.canvasSize, this.canvasSize);
 
     this.svgChunks = [];
 
@@ -102,7 +102,9 @@ export default {
     // Draw time
     this.UpdateSvg();
 
-    window.addEventListener('resize', this.handleResize)
+    window.addEventListener('resize', this.handleResize);
+    console.log("Mounted")
+    this.$forceUpdate();
   },
   beforeDestroy: function () {
     window.removeEventListener('resize', this.handleResize)
@@ -119,11 +121,10 @@ export default {
       this.UpdateChunks();
       this.UpdateSvg();
     },
+    canvasSize: function(val) {
+      this.handleResize();
+    },
     timeNow: function(val) {
-
-      if (this.canvasSize != Math.min(this.$refs["drawing"].clientWidth,this.$refs["drawing"].clientHeight)) {
-        this.handleResize();
-      }
       
       if (this.svg == null)
         return;
@@ -149,8 +150,19 @@ export default {
     }
   },
   methods: {
+    calculateSize() {
+      this.canvasSize = this.$refs["drawing"] ? 
+        Math.min(624, Math.min(this.$refs["drawing"].clientWidth,this.$refs["drawing"].clientHeight)) :
+        null;
+    },
     handleResize() {
-      this.canvasSize = Math.min(this.$refs["drawing"].clientWidth,this.$refs["drawing"].clientHeight);
+      //this.canvasSize = Math.min(this.$refs["drawing"].clientWidth,this.$refs["drawing"].clientHeight);
+
+      this.calculateSize();
+
+      console.log("Canvas Size:", this.canvasSize);
+
+      console.log(this.$refs["drawing"]);
 
       this.canvasPadding = 20;
 
@@ -163,9 +175,10 @@ export default {
       this.y = (this.canvasPadding/2) + this.size/2;
 
       if (this.svg) {
+        this.svg.size(this.canvasSize, this.canvasSize);
+        this.$refs["drawing"].width = this.canvasSize;
+        this.$refs["drawing"].height = this.canvasSize;
 
-
-        this.svg.size(this.canvasSize,this.canvasSize);        
       }
     },
     UpdateChunks: async function() {
@@ -313,7 +326,8 @@ export default {
     color: #56b983;
   }
   #drawing {
-    width: 100%;
+    width: 90vmin;
+    max-width: 624px;
     display: flex;
     justify-content: center;
     align-items: center;
