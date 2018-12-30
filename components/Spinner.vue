@@ -93,7 +93,7 @@ export default {
 
     let SVG = await import("svg.js");
 
-    this.svg = SVG("drawing").size(this.canvasSize, this.canvasSize);
+    this.svg = SVG("drawing");//.size(this.canvasSize, this.canvasSize);
 
     this.svgChunks = [];
 
@@ -103,15 +103,14 @@ export default {
     this.UpdateSvg();
 
     window.addEventListener('resize', this.handleResize);
-    this.$forceUpdate();
+
+    this.handleResize();    
   },
   beforeDestroy: function () {
-    window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener('resize', this.handleResize);
   },
   watch: {
     tasks: function(val) {
-
-      console.log("Updating tasks");
       
       this.svgChunks = [];
       this.svgProgress = null;
@@ -151,11 +150,10 @@ export default {
   methods: {
     calculateSize() {
       this.canvasSize = this.$refs["drawing"] ? 
-        Math.min(624, Math.min(this.$refs["drawing"].clientWidth,this.$refs["drawing"].clientHeight)) :
+        Math.min(624, Math.min(this.$refs["drawing"].clientWidth, this.$refs["drawing"].clientHeight)) :
         null;
     },
     handleResize() {
-      //this.canvasSize = Math.min(this.$refs["drawing"].clientWidth,this.$refs["drawing"].clientHeight);
 
       this.calculateSize();
 
@@ -166,14 +164,12 @@ export default {
       this.radius = (this.size/2);
       this.innerRadius = this.radius - (this.radius * this.innerRadiusPercentage);
 
-      this.x = (this.canvasPadding/2) + this.size/2;
-      this.y = (this.canvasPadding/2) + this.size/2;
+      this.x = (this.canvasPadding / 2) + this.size/2;
+      this.y = (this.canvasPadding / 2) + this.size/2;
 
       if (this.svg) {
         this.svg.size(this.canvasSize, this.canvasSize);
-        //this.$refs["drawing"].width = this.canvasSize;
-        //this.$refs["drawing"].height = this.canvasSize;
-
+        console.log(`Resized svg to ${this.canvasSize}`)
       }
     },
     UpdateChunks: async function() {

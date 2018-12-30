@@ -32,7 +32,7 @@
       v-bind:time-end="timeEnd"
       v-bind:inner-radius-percentage=0.4
       v-bind:chunk-padding=8
-      v-bind:chunk-stroke=2
+      v-bind:chunk-stroke=4
       v-bind:disabled=false
       progress-colour="red"
       chunk-colour="monochrome"
@@ -126,7 +126,6 @@ export default
     max-width: $max-width;
   }
   html {
-    font-size: 24px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -137,6 +136,15 @@ export default
     flex-grow: 1;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  :root {
+    font-size: calc(1vw + 1vh + .5vmin);
+  }
+
+  #app {
+    max-height: 95%;
+    min-height: 95%;
   }
 
 </style>
