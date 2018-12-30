@@ -1,0 +1,10 @@
+#spinner {
+  color: #56b983;
+}
+#drawing {
+  width: 90vmin;
+  max-width: 624px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
