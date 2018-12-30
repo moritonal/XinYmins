@@ -207,13 +207,14 @@ var _default = {
 
             case 3:
               SVG = _context.sent;
-              this.svg = SVG("drawing").size(this.canvasSize, this.canvasSize);
+              this.svg = SVG("drawing"); //.size(this.canvasSize, this.canvasSize);
+
               this.svgChunks = [];
               this.UpdateChunks(); // Draw time
 
               this.UpdateSvg();
               window.addEventListener('resize', this.handleResize);
-              this.$forceUpdate();
+              this.handleResize();
 
             case 10:
             case "end":
@@ -232,7 +233,6 @@ var _default = {
   },
   watch: {
     tasks: function tasks(val) {
-      console.log("Updating tasks");
       this.svgChunks = [];
       this.svgProgress = null;
       this.svg.clear();
@@ -267,7 +267,6 @@ var _default = {
       this.canvasSize = this.$refs["drawing"] ? Math.min(624, Math.min(this.$refs["drawing"].clientWidth, this.$refs["drawing"].clientHeight)) : null;
     },
     handleResize: function handleResize() {
-      //this.canvasSize = Math.min(this.$refs["drawing"].clientWidth,this.$refs["drawing"].clientHeight);
       this.calculateSize();
       this.canvasPadding = 20;
       this.size = this.canvasSize - this.canvasPadding;
@@ -277,8 +276,8 @@ var _default = {
       this.y = this.canvasPadding / 2 + this.size / 2;
 
       if (this.svg) {
-        this.svg.size(this.canvasSize, this.canvasSize); //this.$refs["drawing"].width = this.canvasSize;
-        //this.$refs["drawing"].height = this.canvasSize;
+        this.svg.size(this.canvasSize, this.canvasSize);
+        console.log("Resized svg to ".concat(this.canvasSize));
       }
     },
     UpdateChunks: function () {
@@ -518,7 +517,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2823" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5202" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

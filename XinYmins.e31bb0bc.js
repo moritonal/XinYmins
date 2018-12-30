@@ -20795,7 +20795,7 @@ exports.default = _default;
           "time-end": _vm.timeEnd,
           "inner-radius-percentage": 0.4,
           "chunk-padding": 8,
-          "chunk-stroke": 2,
+          "chunk-stroke": 4,
           disabled: false,
           "progress-colour": "red",
           "chunk-colour": "monochrome",
@@ -41758,7 +41758,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2823" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5202" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
