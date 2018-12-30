@@ -1,6 +1,6 @@
 <template>
   <div class="w-100">
-    <div id="cont" class="row btn-group m-2">
+    <div id="cont" class="row btn-group m-3">
       <input type="button" id="previous-btn" class="btn btn-secondary" v-on:click="$emit('previous')" value="<"/>
       <input type="button" id="next-btn" class="btn btn-primary" v-on:click="$emit('next')" value=">"/>
     </div>
@@ -41,6 +41,9 @@ export default {
 
     border: 1px solid black;
     border-radius: 5px;
+  }
+  .btn {
+    padding: 10px;
   }
   #previous-btn {
     flex-grow: 1;
