@@ -4,9 +4,9 @@
   "description": "Time tracking software to organise meetings",
   "main": "index.js",
   "scripts": {
-    "serve": "parcel ./index.html",
+    "serve": "parcel ./src/index.html",
     "build": "npm-run-all build:*",
-    "build:parcel": "parcel build ./index.html --public-url .",
+    "build:parcel": "parcel build ./src/index.html --public-url .",
     "build:gulp": "gulp",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "docker": "docker run --rm -it -p 80:80 (docker build -q .)",
@@ -31,6 +31,7 @@
     "moment": "^2.22.2",
     "randomcolor": "^0.5.3",
     "svg.js": "^2.6.6",
+    "svg2png": "^4.1.1",
     "vue": "^2.5.17",
     "vue-hot-reload-api": "^2.3.1"
   },
@@ -46,10 +47,17 @@
     "cssnano": "^4.1.8",
     "gh-pages": "^2.0.1",
     "gulp": "^4.0.0",
+    "gulp-logger": "0.0.2",
+    "gulp-raster": "^0.2.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-responsive": "^2.11.0",
+    "gulp-svg2png": "^2.0.2",
     "npm-run-all": "^4.1.5",
+    "parcel-plugin-sw-precache": "^1.0.3",
     "sass": "^1.15.2",
     "vue-loader": "^14.2.1",
     "vue-template-compiler": "^2.5.17",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "workbox-build": "^3.6.3"
   }
 }

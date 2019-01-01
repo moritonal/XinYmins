@@ -1,0 +1,27 @@
+{
+    "short_name": "XinY",
+    "name": "X in Y",
+    "icons": [
+      {
+        "src": "./assets/icon.svg",
+        "type": "image/svg"
+      }, {
+        "src": "./assets/generated/icon-32.png",
+        "sizes": "32x32",
+        "type": "image/png"
+      },{
+        "src": "./assets/generated/icon-64.png",
+        "sizes": "64x64",
+        "type": "image/png"
+      }, {
+        "src": "./assets/generated/icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/",
+    "background_color": "#3367D6",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#3367D6"
+  }
