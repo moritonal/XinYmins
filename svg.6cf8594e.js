@@ -104,7 +104,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"node_modules/svg.js/dist/svg.js":[function(require,module,exports) {
+})({"../node_modules/svg.js/dist/svg.js":[function(require,module,exports) {
 var define;
 /*!
 * svg.js - A lightweight library for manipulating and animating SVG.
@@ -5708,7 +5708,7 @@ if (typeof window.CustomEvent !== 'function') {
 return SVG
 
 }));
-},{}],"../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"../../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -5735,7 +5735,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5202" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "27685" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -5877,5 +5877,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js","node_modules/svg.js/dist/svg.js"], null)
-//# sourceMappingURL=/svg.4e305413.map
+},{}]},{},["../../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js","../node_modules/svg.js/dist/svg.js"], null)
+//# sourceMappingURL=/svg.6cf8594e.map

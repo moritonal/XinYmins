@@ -104,7 +104,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"node_modules/randomcolor/randomColor.js":[function(require,module,exports) {
+})({"../node_modules/randomcolor/randomColor.js":[function(require,module,exports) {
 var define;
 // randomColor by David Merfield under the CC0 license
 // https://github.com/davidmerfield/randomColor/
@@ -560,7 +560,7 @@ var define;
   return randomColor;
 }));
 
-},{}],"../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"../../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -587,7 +587,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5202" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "27685" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -729,5 +729,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js","node_modules/randomcolor/randomColor.js"], null)
-//# sourceMappingURL=/randomColor.0d5e8780.map
+},{}]},{},["../../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js","../node_modules/randomcolor/randomColor.js"], null)
+//# sourceMappingURL=/randomColor.53a47a9a.map

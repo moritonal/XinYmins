@@ -1,0 +1,1 @@
+{"version":3,"sources":["sw.js"],"names":["self","importScripts"],"mappings":";AAAAA,KAAKC,cAAc","file":"sw.map","sourceRoot":"..\\src","sourcesContent":["self.importScripts(\"./service-worker.js\");"]}

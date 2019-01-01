@@ -131,14 +131,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $e70f9c = exports.default || module.exports;
+        var $258fe1 = exports.default || module.exports;
       
-      if (typeof $e70f9c === 'function') {
-        $e70f9c = $e70f9c.options;
+      if (typeof $258fe1 === 'function') {
+        $258fe1 = $258fe1.options;
       }
     
         /* template */
-        Object.assign($e70f9c, (function () {
+        Object.assign($258fe1, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -187,9 +187,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$e70f9c', $e70f9c);
+            api.createRecord('$258fe1', $258fe1);
           } else {
-            api.reload('$e70f9c', $e70f9c);
+            api.reload('$258fe1', $258fe1);
           }
         }
 
@@ -200,7 +200,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"_css_loader":"../../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.runtime.esm.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -227,7 +227,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5202" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "27685" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -369,5 +369,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js"], null)
+},{}]},{},["../../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js"], null)
 //# sourceMappingURL=/Footer.45ed7142.map
