@@ -52,7 +52,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "5bf243076c36af7df056fc644be2921e"
+    "revision": "0d59f276a059a049e1479d7de056026e"
   },
   {
     "url": "manifest.331ccbc4.webmanifest",
@@ -63,12 +63,16 @@ self.__precacheManifest = [
     "revision": "9c302f2196f8f7e03b1c3e754dc215b3"
   },
   {
+    "url": "manifest.d58b9f49.webmanifest",
+    "revision": "b298d0ebf4351ee61482deb272249cc3"
+  },
+  {
     "url": "randomColor.501800a5.js",
     "revision": "414b29efbf1b198a8750819bda1a4bae"
   },
   {
     "url": "service-worker.js",
-    "revision": "611a832dd83e8b93c2f797dce7076104"
+    "revision": "49c975a5c2b3c5aa268e897849598e49"
   },
   {
     "url": "Spinner.3f1c8296.css",
