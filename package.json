@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/Glitch0011/XinYmins#readme",
   "dependencies": {
+    "@createjs/tweenjs": "^2.0.0-beta.4",
     "bootstrap-vue": "^2.0.0-rc.11",
     "moment": "^2.22.2",
     "randomcolor": "^0.5.3",
