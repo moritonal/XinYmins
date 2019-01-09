@@ -7,8 +7,6 @@ import BootstrapVue from "bootstrap-vue";
 
 Vue.use(BootstrapVue);
 
-// import 'bootstrap/dist/css/bootstrap.css'
-
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import "./scss/custom.scss"
@@ -19,6 +17,17 @@ new Vue({
 });
 
 if ('serviceWorker' in navigator) {
+
+    let val = process.env.NODE_ENV;
+
+    let setServiceWorker = val != "development";
+
+    console.log(`Release mode is '${val}', ${setServiceWorker ? '' : 'not'} setting Service Worker`);
+
+    if (!setServiceWorker) {
+        return;
+    }
+
     window.addEventListener('load', () => {
         console.log("Registering service worker");
         navigator.serviceWorker.register('/sw.js')
