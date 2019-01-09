@@ -71,13 +71,16 @@ export default {
       type: String,
       default: "bright"
     },
-    "disabled": false
+    "disabled": false,
+    "total": {
+      type: Number,
+      default: 360
+    } 
   },
   data () {
     return {
       svgChunks: null,
       svgProgress: null,
-      total: 360,
       size: null,
       radius: null,
       innerRadius: null,
@@ -88,23 +91,7 @@ export default {
     }
   },
   mounted: async function() {
-
-    this.handleResize();
-
-    let SVG = await import("svg.js");
-
-    this.svg = SVG("drawing");//.size(this.canvasSize, this.canvasSize);
-
-    this.svgChunks = [];
-
-    this.UpdateChunks();
-
-    // Draw time
-    this.UpdateSvg();
-
-    window.addEventListener('resize', this.handleResize);
-
-    this.handleResize();    
+    this.init();
   },
   beforeDestroy: function () {
     window.removeEventListener('resize', this.handleResize);
@@ -148,6 +135,24 @@ export default {
     }
   },
   methods: {
+    async init() {
+      this.handleResize();
+
+      let SVG = await import("svg.js");
+
+      this.svg = SVG("drawing");//.size(this.canvasSize, this.canvasSize);
+
+      this.svgChunks = [];
+
+      this.UpdateChunks();
+
+      // Draw time
+      this.UpdateSvg();
+
+      // window.addEventListener('resize', this.handleResize);
+
+      this.handleResize();    
+    },
     calculateSize() {
       this.canvasSize = this.$refs["drawing"] ? 
         Math.min(624, Math.min(this.$refs["drawing"].clientWidth, this.$refs["drawing"].clientHeight)) :
@@ -164,8 +169,11 @@ export default {
       this.radius = (this.size/2);
       this.innerRadius = this.radius - (this.radius * this.innerRadiusPercentage);
 
-      this.x = (this.canvasPadding / 2) + this.size/2;
+      let x = Math.min(624, this.$refs["drawing"].clientWidth);
+      this.x = (this.canvasPadding / 2) + this.size/2;//(x-this.canvasPadding)/2;
       this.y = (this.canvasPadding / 2) + this.size/2;
+
+      console.log(`X: ${this.x}, Y: ${this.y}`);
 
       if (this.svg) {
         this.svg.size(this.canvasSize, this.canvasSize);
@@ -173,6 +181,8 @@ export default {
       }
     },
     UpdateChunks: async function() {
+
+      this.calculateSize();
 
       if (this.tasks == null)
         return;
@@ -236,38 +246,52 @@ export default {
         }
 
         let chunk = null;
-
-        if (this.svgChunks.length <= i) {
-
-          chunk = this.drawChunk(
-            this.x, 
-            this.y,
-            this.radius,
-            this.innerRadius,
-            current,
-            current + chunkSize - (this.chunkPadding));
-
-          this.svgChunks.push(chunk);
-
-        } else {
-
-          chunk = this.drawChunk(
-            this.x, 
-            this.y,
-            this.radius,
-            this.innerRadius,
-            current,
-            current + chunkSize - (this.chunkPadding),
-            this.svgChunks[i]);
-
-          this.svgChunks[i] = chunk;
-        }
         
-        chunk.fill(this.tasks[i].colour);
-        chunk.stroke({width:this.chunkStroke});
+        if (this.svgChunks) { 
+          if (this.svgChunks.length <= i) {
+
+            chunk = this.drawChunk(
+              this.x, 
+              this.y,
+              this.radius,
+              this.innerRadius,
+              current,
+              current + chunkSize - (this.chunkPadding));
+
+            this.svgChunks.push(chunk);
+
+          } else {
+
+            chunk = this.drawChunk(
+              this.x, 
+              this.y,
+              this.radius,
+              this.innerRadius,
+              current,
+              current + chunkSize - (this.chunkPadding),
+              this.svgChunks[i]);
+
+            this.svgChunks[i] = chunk;
+          }
+
+          chunk.fill(this.tasks[i].colour);
+          chunk.stroke({width:this.chunkStroke});
+        }
 
         current += chunkSize;
       }
+    },
+    clear: function() {
+        this.svgChunks = null;
+        this.svgProgress = null;
+        /*this.total = 360;
+        this.size = null;
+        this.radius = null;
+        this.innerRadius = null;
+        this.canvasSize = 0;
+        this.x = null;
+        this.y = null;*/
+        //this.svg = null
     },
     drawChunk: function(x, y, radius, innerRadius, start, end, svg) {
       

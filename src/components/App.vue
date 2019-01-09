@@ -23,25 +23,32 @@
       </div>
     </div>
 
-    <spinner-component 
-      id="spinner"
-      class="d-flex justify-content-center"
-      v-bind:tasks="tasks"
-      v-bind:time-start="timeStart"
-      v-bind:time-now="timeNow"
-      v-bind:time-end="timeEnd"
-      v-bind:inner-radius-percentage=0.4
-      v-bind:chunk-padding=8
-      v-bind:chunk-stroke=4
-      v-bind:disabled=false
-      progress-colour="red"
-      chunk-colour="monochrome"
-      chunk-luminosity="light">
-    </spinner-component>
+    <transition name="expand">
+      <spinner-component
+        id="spinner"
+        ref="spinner"
+        class="justify-content-center max-height"
+        v-bind:tasks="tasks"
+        v-bind:time-start="timeStart"
+        v-bind:time-now="timeNow"
+        v-bind:time-end="timeEnd"
+        v-bind:inner-radius-percentage=0.4
+        v-bind:chunk-padding=8
+        v-bind:chunk-stroke=4
+        v-bind:disabled="spinnerDisabled"
+        v-bind:total="spinnerTotal"
+        progress-colour="red"
+        chunk-colour="monochrome"
+        chunk-luminosity="light"
+        v-show='stage == "timer"'>
+      </spinner-component>
+    </transition>
 
-    <footer-component class=""
+    <footer-component
       v-on:next="next"
-      v-on:previous="previous">
+      v-on:previous="previous"
+      v-on:go="Go"
+      v-bind:stage="stage">
     </footer-component>
   </div>
 </template>
@@ -49,24 +56,36 @@
 <script>
 
 import moment from "moment"
+import { Tween, Ease ,Ticker } from "@createjs/tweenjs";
+
+import footer from "./Footer.vue";
 
 export default
 {
   name: 'app',
   components: {
       "spinner-component": () => import("./Spinner.vue"),
-      "header-component": () => import("./Header.vue"),
-      "footer-component": () => import("./Footer.vue")
+      "footer-component": footer
   },
   mounted : function() {
 
-    setInterval(() => {
-      this.timeNow = moment();
-    }, 33);
-
-    this.timeNow = moment();
+    setInterval(()=> {
+      if (this.stage == "intro") {
+        // this.Go();
+      } else {
+        // this.$refs.spinner.clear();
+        //this.Stop();
+      }
+    }, 2500);
   },
   computed: {
+    /*stage: function() {
+      if (this.numberOfItems == null || this.numberOfMinutes == null) {
+        return "intro";
+      } else {
+        return "timer";
+      }
+    },*/
     tasks: function() {
 
       let num = parseInt(this.numberOfItems);
@@ -83,6 +102,57 @@ export default
     }
   },
   methods: {
+    Stop: function() {
+      this.stage = "intro";
+      this.stopTimer();
+      this.numberOfItems = 0;
+      this.numberOfMinutes = 0;
+      this.$refs.spinner.clear();
+    },
+    Go: function() {
+
+      this.startTimer();
+
+      this.stage = "timer";
+
+      this.timeStart = moment();
+      
+      if (this.numberOfItems == null) 
+        this.numberOfItems = 5;
+
+      if (this.numberOfMinutes == null)
+        this.numberOfMinutes = 0.25;
+
+      setTimeout(() => {
+        this.$refs.spinner.handleResize();
+      }, 50);
+
+      setTimeout(() => {
+        this.spinnerDisabled = false;
+
+        Ticker.timingMode = Ticker.RAF;
+        Ticker.framerate = 60;
+
+        Tween.get(this)
+          .to({spinnerTotal:360}, 1000, Ease.getPowOut(2))
+          .call(() => {
+            Ticker.paused = true;
+          });
+
+      }, 500);
+    },
+    stopTimer: function() {
+      clearInterval(this.timer);
+      this.timer = null;
+    },
+    startTimer: function() {
+      
+      this.timer = setInterval(() => {
+        this.timeNow = moment();
+      }, 33);
+
+      this.timeNow = moment();
+    },
     next: function()  {
       let nextTask = this.tasks.find(i=>i.stopTime == null);
       
@@ -102,8 +172,11 @@ export default
     return {
       timeStart: moment(),
       timeNow: moment(),
-      numberOfItems: 6,
-      numberOfMinutes: 5
+      numberOfItems: 5,
+      numberOfMinutes: 5,
+      stage: "intro",
+      spinnerDisabled: true,
+      spinnerTotal: 0
     }
   }
 }
@@ -134,17 +207,59 @@ export default
   }
   #spinner {
     flex-grow: 1;
+    display: flex;
     margin-left: auto;
     margin-right: auto;
+    width: inherit;
   }
 
   :root {
-    font-size: calc(1vw + 1vh + .5vmin);
+    transition: font-size 0.2s;
+  }
+
+  @media screen and (min-width: 624px) {
+    :root {
+      font-size: 16px;
+    }
+  }
+
+  /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+  @media screen and (max-width: 600px) {
+    :root {
+      font-size: 3.7vmin;
+    }
   }
 
   #app {
     max-height: 95%;
     min-height: 95%;
+    justify-content: center;
+  }
+
+  .input-group {
+    flex-wrap: nowrap !important;
+  }
+
+  .expand-enter-active, .expand-leave-active {
+    /*transition: max-height 5s;*/
+    transition: flex-grow 0.5s ease-in-out;
+  }
+
+  .expand-enter, .expand-leave-to {
+    /*max-height: 0px !important;*/
+    flex-grow: 0 !important;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 5s;
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+
+  .max-height {
+    max-height: 10000px;
   }
 
 </style>
