@@ -170,7 +170,7 @@ export default {
       this.innerRadius = this.radius - (this.radius * this.innerRadiusPercentage);
 
       let x = Math.min(624, this.$refs["drawing"].clientWidth);
-      this.x = (this.canvasPadding / 2) + this.size/2;//(x-this.canvasPadding)/2;
+      this.x = (this.canvasPadding / 2) + this.size/2;
       this.y = (this.canvasPadding / 2) + this.size/2;
 
       console.log(`X: ${this.x}, Y: ${this.y}`);
@@ -193,10 +193,13 @@ export default {
       let spaceUsed = null;
       let firstFlexibleChunk = true;
 
+      let totalProgress = this.TotalProgress;
+      let total = this.total;
+
       for (let i = 0; i < this.tasks.length; i++) {
         
         let task = this.tasks[i];
-        let chunkSize = this.total / this.tasks.length;
+        let chunkSize = total / this.tasks.length;
 
         if (task.stopTime) {
           
@@ -204,7 +207,7 @@ export default {
           let timeTotal = this.timeEnd - this.timeStart;
           let ratio = timePassed / timeTotal;
 
-          chunkSize = ratio * this.total
+          chunkSize = ratio * total;
 
           lastStopTime = task.stopTime;
           
@@ -213,13 +216,13 @@ export default {
         } else {
 
           let notCompletedTasks = this.tasks.length - this.tasks.filter(i=>i.stopTime != null).length;
-          let spaceLeft = this.total - spaceUsed;
+          let spaceLeft = total - spaceUsed;
           let spacePerChunk = spaceLeft / notCompletedTasks;
 
-          if (current + spacePerChunk < this.TotalProgress && firstFlexibleChunk) {
+          if (current + spacePerChunk < totalProgress && firstFlexibleChunk) {
             firstFlexibleChunk = false;
 
-            chunkSize = this.TotalProgress - spaceUsed;
+            chunkSize = totalProgress - spaceUsed;
 
             spaceUsed = current + chunkSize;
 
@@ -247,6 +250,8 @@ export default {
 
         let chunk = null;
         
+        let halfChunkPadding = this.chunkPadding / 2;
+
         if (this.svgChunks) { 
           if (this.svgChunks.length <= i) {
 
@@ -255,8 +260,8 @@ export default {
               this.y,
               this.radius,
               this.innerRadius,
-              current,
-              current + chunkSize - (this.chunkPadding));
+              current + halfChunkPadding,
+              (current + chunkSize) - halfChunkPadding);
 
             this.svgChunks.push(chunk);
 
@@ -267,8 +272,8 @@ export default {
               this.y,
               this.radius,
               this.innerRadius,
-              current,
-              current + chunkSize - (this.chunkPadding),
+              current + halfChunkPadding,
+              (current + chunkSize) - (halfChunkPadding),
               this.svgChunks[i]);
 
             this.svgChunks[i] = chunk;
@@ -327,7 +332,12 @@ export default {
     },
     UpdateSvg: function() {
       
-      this.svgProgress = this.drawChunk(this.x, this.y, this.radius, this.innerRadius, 0, Math.max(0, this.TotalProgress - this.chunkPadding), this.svgProgress)
+      this.svgProgress = this.drawChunk(
+        this.x, this.y,
+        this.radius, this.innerRadius,
+        Math.max(0, this.chunkPadding/2),
+        Math.max(this.chunkPadding/2, this.TotalProgress - (this.chunkPadding/2)),
+        this.svgProgress)
         .fill({color: this.progressColour, opacity: 0.6})
         .stroke({width: this.chunkStroke})
         .front();

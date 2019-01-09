@@ -68,15 +68,7 @@ export default
       "footer-component": footer
   },
   mounted : function() {
-
-    setInterval(()=> {
-      if (this.stage == "intro") {
-        // this.Go();
-      } else {
-        // this.$refs.spinner.clear();
-        //this.Stop();
-      }
-    }, 2500);
+    //setTimeout(this.Go, 2000);
   },
   computed: {
     /*stage: function() {
@@ -147,8 +139,12 @@ export default
     },
     startTimer: function() {
       
+      //this.tasks.find(i=>i.stopTime == null).stopTime = this.timeStart.clone().add(1, "minute");
+      //this.tasks.find(i=>i.stopTime == null).stopTime = this.timeStart.clone().add(3, "minute");
+
       this.timer = setInterval(() => {
         this.timeNow = moment();
+        //this.timeNow = this.timeStart.clone().add(3, "minute");
       }, 33);
 
       this.timeNow = moment();
