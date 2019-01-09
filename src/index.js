@@ -24,33 +24,31 @@ if ('serviceWorker' in navigator) {
 
     console.log(`Release mode is '${val}', ${setServiceWorker ? '' : 'not'} setting Service Worker`);
 
-    if (!setServiceWorker) {
-        return;
-    }
+    if (setServiceWorker) {
+        window.addEventListener('load', () => {
+            console.log("Registering service worker");
+            navigator.serviceWorker.register('/sw.js')
+            .then(reg => {
+                console.log("Registered");
+                reg.update();
+                reg.onupdatefound = () => {
+                    console.log("Update found");
+                    const installingWorker = reg.installing;
 
-    window.addEventListener('load', () => {
-        console.log("Registering service worker");
-        navigator.serviceWorker.register('/sw.js')
-        .then(reg => {
-            console.log("Registered");
-            reg.update();
-            reg.onupdatefound = () => {
-                console.log("Update found");
-                const installingWorker = reg.installing;
-
-                installingWorker.onstatechange = () => {
-                    switch (installingWorker.state) {
-                        case "installed":
-                            if (navigator.serviceWorker.controller) {
-                                console.log("Update found, refreshing");
-                                location.reload(true);
-                            }
+                    installingWorker.onstatechange = () => {
+                        switch (installingWorker.state) {
+                            case "installed":
+                                if (navigator.serviceWorker.controller) {
+                                    console.log("Update found, refreshing");
+                                    location.reload(true);
+                                }
+                        }
                     }
                 }
-            }
-        })
-        .catch(registrationError => {
-            console.log('SW registration failed: ', registrationError);
+            })
+            .catch(registrationError => {
+                console.log('SW registration failed: ', registrationError);
+            });
         });
-    });
+    }
 }
