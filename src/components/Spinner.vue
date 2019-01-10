@@ -289,14 +289,6 @@ export default {
     clear: function() {
         this.svgChunks = null;
         this.svgProgress = null;
-        /*this.total = 360;
-        this.size = null;
-        this.radius = null;
-        this.innerRadius = null;
-        this.canvasSize = 0;
-        this.x = null;
-        this.y = null;*/
-        //this.svg = null
     },
     drawChunk: function(x, y, radius, innerRadius, start, end, svg) {
       
@@ -321,9 +313,14 @@ export default {
       }
 
       if (svg && svg.outer) {
+
+        // Update the SVG chunk
         svg.outer.plot(describeArc(x, y, radius, innerRadius, start, end));
+        
       } else {
         if (this.svg) {
+
+          // Construct the SVG chunk
           svg.outer = this.svg.path(describeArc(x, y, radius, innerRadius, start, end));
         }
       }
