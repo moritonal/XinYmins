@@ -173,11 +173,8 @@ export default {
       this.x = (this.canvasPadding / 2) + this.size/2;
       this.y = (this.canvasPadding / 2) + this.size/2;
 
-      console.log(`X: ${this.x}, Y: ${this.y}`);
-
       if (this.svg) {
         this.svg.size(this.canvasSize, this.canvasSize);
-        console.log(`Resized svg to ${this.canvasSize}`)
       }
     },
     UpdateChunks: async function() {

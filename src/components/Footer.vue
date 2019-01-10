@@ -1,6 +1,5 @@
 <template>
   <div class="w-100 cube">
-
     <div id="cont" class="row btn-group m-3 justify-content-center spinnable cube_top" v-bind:class="{ borderDark : stage == 'timer' }">
       <input type="button" key="<" id="previous-btn" class="btn btn-danger" v-on:click="$emit('previous')" value="<" v-if="step2" />
       <input type="button" key=">" id="next-btn" class="btn btn-success" v-on:click="$emit('next')" value=">" v-if="step2" />
