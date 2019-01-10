@@ -1,7 +1,10 @@
 <template>
   <div id="app" class="container-fluid h-100">
-
+    
     <div class="row mx-2 row py-4 justify-content-center d-flex">
+      <div class="row mx-2 row py-4 justify-content-center d-flex hacks">
+        <div>I want to go through</div>
+      </div>
       <div class="col m-1">
         <div class="input-group">
           <input type="number" value="1" class="form-control" v-model="numberOfItems" />
@@ -238,7 +241,7 @@ export default
 
   .expand-enter-active, .expand-leave-active {
     /*transition: max-height 5s;*/
-    transition: flex-grow 0.5s ease-in-out;
+    transition: flex-grow 1.3s cubic-bezier(0.075, 0.82, 0.165, 1.2);
   }
 
   .expand-enter, .expand-leave-to {
@@ -248,6 +251,12 @@ export default
 
   .fade-enter-active, .fade-leave-active {
     transition: opacity 5s;
+  }
+
+  .hacks {
+    position: absolute;
+    transform: translateY(-90px);
+    transition: all 1s;
   }
 
   .fade-enter, .fade-leave-to {
