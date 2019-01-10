@@ -7,7 +7,7 @@
       </div>
       <div class="col m-1">
         <div class="input-group">
-          <input type="number" value="1" class="form-control" v-model="numberOfItems" />
+          <input type="number" value="1" class="form-control" min="1" v-model="numberOfItems" v-on:keyup.enter="Go" />
           <div class="input-group-append">
             <span class="input-group-text">items</span>
           </div>
@@ -18,7 +18,7 @@
       </div>
       <div class="col m-1">
         <div class="input-group">
-          <input type="number" value="1" class="form-control" v-model="numberOfMinutes" />
+          <input type="number" value="1" class="form-control" min="1" v-model="numberOfMinutes" v-on:keyup.enter="Go" />
           <div class="input-group-append">
             <span class="input-group-text">mins</span>
           </div>
