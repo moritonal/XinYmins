@@ -118,6 +118,8 @@ export default
       if (this.numberOfMinutes == null)
         this.numberOfMinutes = 0.25;
 
+      document.title = `${this.numberOfItems} in ${this.numberOfMinutes} minutes`;
+
       setTimeout(() => {
         this.$refs.spinner.handleResize();
       }, 50);
