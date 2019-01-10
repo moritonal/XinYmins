@@ -22,17 +22,16 @@ if ('serviceWorker' in navigator) {
 
     let setServiceWorker = val != "development";
 
-    console.log(`Release mode is '${val}', ${setServiceWorker ? '' : 'not'} setting Service Worker`);
+    console.log(`Release mode is '${val}', ${setServiceWorker ? '' : 'not'} setting ServiceWorker`);
 
     if (setServiceWorker) {
         window.addEventListener('load', () => {
-            console.log("Registering service worker");
             navigator.serviceWorker.register('/sw.js')
             .then(reg => {
-                console.log("Registered");
+                console.log("ServiceWorker correctly registered");
                 reg.update();
                 reg.onupdatefound = () => {
-                    console.log("Update found");
+                    console.log("Update to ServiceWorker found");
                     const installingWorker = reg.installing;
 
                     installingWorker.onstatechange = () => {
