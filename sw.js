@@ -36,7 +36,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "1c2d2b4400826054ccc6f29313ebe180"
+    "revision": "8d43537e8f75df282a8f00f9e4ef2b3a"
   },
   {
     "url": "manifest.d58b9f49.webmanifest",
@@ -48,23 +48,23 @@ self.__precacheManifest = [
   },
   {
     "url": "service-worker.js",
-    "revision": "ecd3039b8ab35f4c4bd45d9691ad75e5"
+    "revision": "0cacd809829d9af8fdc7e45ea025f7c0"
   },
   {
-    "url": "Spinner.34951fe9.css",
+    "url": "Spinner.5aaac67d.css",
     "revision": "8d2c194bc530c19155475f79e5a96dc4"
   },
   {
-    "url": "Spinner.34951fe9.js",
-    "revision": "a1f44671698ad4a372caec8e0555d644"
+    "url": "Spinner.5aaac67d.js",
+    "revision": "54984b2de12078578eb307b5c566db01"
   },
   {
-    "url": "src.28bdd072.css",
+    "url": "src.44b1cc4f.js",
+    "revision": "59d9afa64b8185927befa22b527030ff"
+  },
+  {
+    "url": "src.d33dfdeb.css",
     "revision": "788154cc9eb7f7f0c1c8fa1508a4df83"
-  },
-  {
-    "url": "src.7df13597.js",
-    "revision": "a78b29a0a5ef25081a2ce2ed5606ccfe"
   },
   {
     "url": "svg.35b8057b.js",
