@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import 'babel-polyfill';
+// import 'babel-polyfill';
 import App from './components/App.vue';
 
 import BootstrapVue from "bootstrap-vue";
