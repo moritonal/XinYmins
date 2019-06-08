@@ -11,10 +11,11 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
-workbox.skipWaiting();
-workbox.clientsClaim();
+workbox.core.skipWaiting();
+
+workbox.core.clientsClaim();
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
@@ -36,44 +37,43 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "8d43537e8f75df282a8f00f9e4ef2b3a"
+    "revision": "cde113f7c9b5eac91da329f35639a085"
   },
   {
-    "url": "manifest.d58b9f49.webmanifest",
+    "url": "manifest.webmanifest",
     "revision": "b298d0ebf4351ee61482deb272249cc3"
   },
   {
-    "url": "randomColor.501800a5.js",
-    "revision": "414b29efbf1b198a8750819bda1a4bae"
+    "url": "randomColor.17d33b19.js",
+    "revision": "dbeb9ea381816b0e597c55551c31b505"
   },
   {
     "url": "service-worker.js",
-    "revision": "0cacd809829d9af8fdc7e45ea025f7c0"
+    "revision": "5af5d6e537aec7a0d2a342cf396b1996"
   },
   {
-    "url": "Spinner.5aaac67d.css",
+    "url": "Spinner.ab335f16.css",
     "revision": "8d2c194bc530c19155475f79e5a96dc4"
   },
   {
-    "url": "Spinner.5aaac67d.js",
-    "revision": "54984b2de12078578eb307b5c566db01"
+    "url": "Spinner.ab335f16.js",
+    "revision": "469ade37d95ad30eed4732ddd300d0c0"
   },
   {
-    "url": "src.44b1cc4f.js",
-    "revision": "59d9afa64b8185927befa22b527030ff"
+    "url": "src.0a617c25.css",
+    "revision": "e6c9bf597d4d818ae20d02e710884554"
   },
   {
-    "url": "src.d33dfdeb.css",
-    "revision": "788154cc9eb7f7f0c1c8fa1508a4df83"
+    "url": "src.73fd473e.js",
+    "revision": "ca5037377677c545335a99cdfb01967c"
   },
   {
-    "url": "svg.35b8057b.js",
-    "revision": "ddf9314d33329c4702fd226eaeaa5f02"
+    "url": "svg.21d693ad.js",
+    "revision": "da64f139e84aee30efbcb496e2e605fa"
   }
 ].concat(self.__precacheManifest || []);
-workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerRoute(/https:\/\/fonts.googleapis.com/, workbox.strategies.staleWhileRevalidate(), 'GET');
-workbox.routing.registerRoute(/https:\/\/fonts.gstatic.com/, workbox.strategies.staleWhileRevalidate(), 'GET');
-workbox.routing.registerRoute(/\//, workbox.strategies.staleWhileRevalidate(), 'GET');
+workbox.routing.registerRoute(/https:\/\/fonts.googleapis.com/, new workbox.strategies.StaleWhileRevalidate(), 'GET');
+workbox.routing.registerRoute(/https:\/\/fonts.gstatic.com/, new workbox.strategies.StaleWhileRevalidate(), 'GET');
+workbox.routing.registerRoute(/\//, new workbox.strategies.StaleWhileRevalidate(), 'GET');
