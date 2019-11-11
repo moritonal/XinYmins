@@ -37,11 +37,11 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "cc5019c88dff0412a41362f1dd88da88"
+    "revision": "6726d27cd63756958de92e79e2960be8"
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "b298d0ebf4351ee61482deb272249cc3"
+    "revision": "74221ba2b07553074dbad7a44a4d628e"
   },
   {
     "url": "randomColor.17d33b19.js",
@@ -49,23 +49,23 @@ self.__precacheManifest = [
   },
   {
     "url": "service-worker.js",
-    "revision": "99cf9b145f8fc37c1e70e094740bbb24"
+    "revision": "10d0decfbe5ebed984983aa6d12b40d5"
   },
   {
-    "url": "Spinner.ab335f16.css",
+    "url": "Spinner.0e21c25e.css",
     "revision": "8d2c194bc530c19155475f79e5a96dc4"
   },
   {
-    "url": "Spinner.ab335f16.js",
-    "revision": "469ade37d95ad30eed4732ddd300d0c0"
+    "url": "Spinner.0e21c25e.js",
+    "revision": "6825125b676c139c3c800cd466f3b4c5"
   },
   {
-    "url": "src.0a617c25.css",
-    "revision": "e6c9bf597d4d818ae20d02e710884554"
+    "url": "src.9a016737.js",
+    "revision": "c8412c0a96a30e3e5f51758356fbd0a8"
   },
   {
-    "url": "src.f384ac8d.js",
-    "revision": "516cef4f2d0a5b8f6a5dd609fc9e5392"
+    "url": "src.b2175c8b.css",
+    "revision": "da7ee2838af08def7b1f48333e335d03"
   },
   {
     "url": "svg.21d693ad.js",
