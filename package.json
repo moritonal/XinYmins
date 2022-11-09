@@ -42,7 +42,7 @@
     "@babel/core": "^7.10.5",
     "@storybook/addon-knobs": "^5.3.19",
     "@storybook/addon-options": "^5.3.19",
-    "@storybook/vue": "^5.3.19",
+    "@storybook/vue": "^6.5.13",
     "@vue/component-compiler-utils": "^3.1.2",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
